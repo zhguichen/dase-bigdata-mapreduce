@@ -1,0 +1,38 @@
+{
+  "experiment_start": "2025-11-28T15:08:01.966280",
+  "experiment_end": "2025-11-28T15:18:50.903416",
+  "configuration": {
+    "task_type": "terasort",
+    "data_sizes": [
+      "500MB",
+      "1GB",
+      "1500MB"
+    ],
+    "slowstart_values": [
+      0.05,
+      0.1,
+      0.2,
+      0.3,
+      0.5,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "runs_per_config": 3,
+    "num_reducers": 4
+  },
+  "results": [
+    {
+      "task_type": "terasort",
+      "data_size": "500MB",
+      "slowstart": 0.05,
+      "run_number": 1,
+      "job_id": "job_1764162740815_0370",
+      "application_id": "application_1764162740815_0370",
+      "submit_time": "2025-11-28 15:09:07",
+      "total_time": 155.44303703308105,
+      "num_reducers": 4
+    }
+  ]
+}

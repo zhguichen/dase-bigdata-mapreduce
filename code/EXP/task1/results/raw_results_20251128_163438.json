@@ -1,0 +1,137 @@
+{
+  "experiment_start": "2025-11-28T15:47:38.559865",
+  "experiment_end": "2025-11-28T16:34:38.019437",
+  "configuration": {
+    "task_type": "wordcount",
+    "data_sizes": [
+      "500MB",
+      "1GB",
+      "1500MB"
+    ],
+    "slowstart_values": [
+      0.05,
+      0.1,
+      0.2,
+      0.3,
+      0.5,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "runs_per_config": 3,
+    "num_reducers": 4
+  },
+  "results": [
+    {
+      "task_type": "wordcount",
+      "data_size": "500MB",
+      "slowstart": 0.05,
+      "run_number": 1,
+      "job_id": "job_1764162740815_0375",
+      "application_id": "application_1764162740815_0375",
+      "submit_time": "2025-11-28 15:48:03",
+      "total_time": 390.9757685661316,
+      "num_reducers": 4
+    },
+    {
+      "task_type": "wordcount",
+      "data_size": "500MB",
+      "slowstart": 0.05,
+      "run_number": 2,
+      "job_id": "job_1764162740815_0376",
+      "application_id": "application_1764162740815_0376",
+      "submit_time": "2025-11-28 15:54:42",
+      "total_time": 235.32381868362427,
+      "num_reducers": 4
+    },
+    {
+      "task_type": "wordcount",
+      "data_size": "500MB",
+      "slowstart": 0.05,
+      "run_number": 3,
+      "job_id": "job_1764162740815_0377",
+      "application_id": "application_1764162740815_0377",
+      "submit_time": "2025-11-28 15:58:45",
+      "total_time": 234.24682712554932,
+      "num_reducers": 4
+    },
+    {
+      "task_type": "wordcount",
+      "data_size": "500MB",
+      "slowstart": 0.1,
+      "run_number": 1,
+      "job_id": "job_1764162740815_0378",
+      "application_id": "application_1764162740815_0378",
+      "submit_time": "2025-11-28 16:02:52",
+      "total_time": 232.31070590019226,
+      "num_reducers": 4
+    },
+    {
+      "task_type": "wordcount",
+      "data_size": "500MB",
+      "slowstart": 0.1,
+      "run_number": 2,
+      "job_id": "job_1764162740815_0379",
+      "application_id": "application_1764162740815_0379",
+      "submit_time": "2025-11-28 16:06:52",
+      "total_time": 233.15553903579712,
+      "num_reducers": 4
+    },
+    {
+      "task_type": "wordcount",
+      "data_size": "500MB",
+      "slowstart": 0.1,
+      "run_number": 3,
+      "job_id": "job_1764162740815_0380",
+      "application_id": "application_1764162740815_0380",
+      "submit_time": "2025-11-28 16:10:54",
+      "total_time": 236.20400881767273,
+      "num_reducers": 4
+    },
+    {
+      "task_type": "wordcount",
+      "data_size": "500MB",
+      "slowstart": 0.2,
+      "run_number": 1,
+      "job_id": "job_1764162740815_0381",
+      "application_id": "application_1764162740815_0381",
+      "submit_time": "2025-11-28 16:15:03",
+      "total_time": 231.3500418663025,
+      "num_reducers": 4
+    },
+    {
+      "task_type": "wordcount",
+      "data_size": "500MB",
+      "slowstart": 0.2,
+      "run_number": 2,
+      "job_id": "job_1764162740815_0382",
+      "application_id": "application_1764162740815_0382",
+      "submit_time": "2025-11-28 16:19:02",
+      "total_time": 236.05021810531616,
+      "num_reducers": 4
+    },
+    {
+      "task_type": "wordcount",
+      "data_size": "500MB",
+      "slowstart": 0.2,
+      "run_number": 3,
+      "job_id": "job_1764162740815_0383",
+      "application_id": "application_1764162740815_0383",
+      "submit_time": "2025-11-28 16:23:06",
+      "total_time": 235.20785665512085,
+      "num_reducers": 4
+    },
+    {
+      "task_type": "wordcount",
+      "data_size": "500MB",
+      "slowstart": 0.3,
+      "run_number": 1,
+      "job_id": "job_1764162740815_0384",
+      "application_id": "application_1764162740815_0384",
+      "submit_time": "2025-11-28 16:27:14",
+      "total_time": 235.2034468650818,
+      "num_reducers": 4
+    }
+  ]
+}

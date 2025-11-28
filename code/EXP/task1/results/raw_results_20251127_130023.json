@@ -1,0 +1,88 @@
+{
+  "experiment_start": "2025-11-27T12:58:53.477743",
+  "experiment_end": "2025-11-27T13:00:23.460594",
+  "configuration": {
+    "data_size": "1GB",
+    "slowstart_values": [
+      0.5
+    ],
+    "runs_per_config": 1,
+    "num_reducers": 4
+  },
+  "results": [
+    {
+      "slowstart": 0.5,
+      "run_number": 1,
+      "job_id": "job_1764162740815_0315",
+      "application_id": "application_1764162740815_0315",
+      "submit_time": "2025-11-27 12:58:56",
+      "job_name": "Task1_Sensitivity_slowstart0.5_reducers4",
+      "state": "SUCCEEDED",
+      "uberized": false,
+      "submit_time_ts": 1764219541011,
+      "start_time_ts": 1764219553522,
+      "finish_time_ts": 1764219621293,
+      "submit_time_str": "Thu Nov 27 12:59:01 CST 2025",
+      "start_time_str": "Thu Nov 27 12:59:13 CST 2025",
+      "finish_time_str": "Thu Nov 27 13:00:21 CST 2025",
+      "elapsed_time_str": "1mins, 7sec",
+      "total_time_from_api": 67.77,
+      "avg_map_time": 31.85,
+      "avg_shuffle_time": 25.74,
+      "avg_merge_time": 0.05,
+      "avg_reduce_time": 0.55,
+      "job_elapsed_time": 67.77,
+      "total_map_time": 532.37,
+      "total_reduce_time": 105.36,
+      "cpu_time": 463.91,
+      "gc_time": 4.81,
+      "physical_memory_bytes": 11988561920,
+      "virtual_memory_bytes": 66641203200,
+      "committed_heap_bytes": 11153702912,
+      "peak_map_physical_memory": 746545152,
+      "peak_reduce_physical_memory": 238137344,
+      "peak_map_virtual_memory": 3334586368,
+      "peak_reduce_virtual_memory": 3332763648,
+      "hdfs_bytes_read": 1073805178,
+      "hdfs_bytes_written": 1451,
+      "file_bytes_read": 262792,
+      "file_bytes_written": 6348802,
+      "map_input_records": 22709612,
+      "map_input_bytes": 1073803274,
+      "map_output_records": 227096120,
+      "map_output_bytes": 1982126314,
+      "reduce_shuffle_bytes": 19952,
+      "reduce_input_records": 1824,
+      "reduce_input_groups": 114,
+      "reduce_output_records": 114,
+      "shuffled_maps": 64,
+      "map_completion_time": 66.33,
+      "first_reduce_start_time": 38.68,
+      "reduce_completion_time": 67.71,
+      "num_map_tasks": 16,
+      "num_reduce_tasks": 4,
+      "min_reduce_finish_time": 66.92,
+      "max_reduce_finish_time": 67.71,
+      "min_reduce_elapsed": 20.59,
+      "max_reduce_elapsed": 29.01,
+      "avg_reduce_elapsed": 26.34,
+      "reduce_elapsed_stddev": 3.9,
+      "shuffle_time": {
+        "min": 19.9,
+        "max": 28.44,
+        "avg": 25.74
+      },
+      "merge_time": {
+        "min": 0.03,
+        "max": 0.07,
+        "avg": 0.05
+      },
+      "reduce_time": {
+        "min": 0.53,
+        "max": 0.62,
+        "avg": 0.55
+      },
+      "reduce_tasks": null
+    }
+  ]
+}
