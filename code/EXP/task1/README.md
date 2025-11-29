@@ -134,7 +134,7 @@ cat ../task1/results/raw_results_enhanced.json
 - 第一个 Reduce 启动时间
 - 所有 Reduce 完成时间
 
-**注意**: 如果工具无法提取时间信息（作业历史已过期），可以从 JobHistory Web UI (http://47.116.112.198:19888) 手动查看。
+**注意**: 如果工具无法提取时间信息（作业历史已过期），可以从 JobHistory Web UI (http://47.116.119.3:19888) 手动查看。
 
 ## 实验结果
 
@@ -192,8 +192,8 @@ hadoop jar wordcount.jar WordCount \
 
 ### Web UI
 
-- ResourceManager: http://47.116.112.198:8088
-- JobHistory: http://47.116.112.198:19888
+- ResourceManager: http://47.116.119.3:8088
+- JobHistory: http://47.116.119.3:19888
 
 ### 命令行
 

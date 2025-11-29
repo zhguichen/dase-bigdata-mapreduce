@@ -19,7 +19,7 @@
 
 #### 1. 硬件环境
 
-本实验的硬件环境大致如下，具体配置可参考：[环境配置](code/环境配置.md)
+本实验的硬件环境大致如下，具体配置可参考：
 
 
 
@@ -49,9 +49,9 @@
 
 **集群 Web UI 访问地址**
 
-+ HDFS NameNode: [http://47.116.112.198:9870](about:blank)
-+ YARN ResourceManager: [http://47.116.112.198:8088](about:blank)
-+ JobHistory Server: [http://47.116.112.198:19888](about:blank)
++ HDFS NameNode: [http://47.116.119.3:9870](about:blank)
++ YARN ResourceManager: [http://47.116.119.3:8088](about:blank)
++ JobHistory Server: [http://47.116.119.3:19888](about:blank)
 
 ---
 
@@ -79,7 +79,7 @@
 
 + Python 环境激活与依赖检查（如图所示）
 
-### ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764296047775-b3985335-3268-4bce-b842-e14163bcc3ea.png?x-oss-process=image%2Fformat%2Cwebp)
+![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764296047775-b3985335-3268-4bce-b842-e14163bcc3ea.png?x-oss-process=image%2Fformat%2Cwebp)
 
 ### <font style="color:rgb(51, 51, 51);">实验负载</font>
 
@@ -660,7 +660,7 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 
 **2. 不同数据规模的 slowstart-耗时曲线**
 
-![](https://cdn.nlark.com/yuque/0/2025/png/32620802/1764336912413-a792c251-614d-41ce-991a-3af923153ce9.png)
+![](https://cdn.nlark.com/yuque/0/2025/png/32620802/1764421044198-d9232753-672f-445a-abe0-5f62c708475e.png)
 
 随着数据规模增大，曲线整体抬升且最优 slowstart 向右移动；500 MB 在 0.1 附近达到最低点，而 1.5 GB 则在 0.9 左右最优，反映了数据越大可能越需要推迟slowstart。从图中可以清晰看到：
 
@@ -729,11 +729,11 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 + **TeraSort** 的主要瓶颈在于 Shuffle 和 I/O，因此需要通过调整 `slowstart` 等参数，提前启动 Reduce 阶段，从而优化调度并缓解 Shuffle 阶段的等待压力。  
 + **WordCount** 受限于 **计算负载**，虽然其 **Shuffle** 阶段相对时间较短，但 <font style="color:rgb(51, 51, 51);">Reduce 过早启动只会增加等待，适合中等 slowstart。</font>
 
-** 4.  Shuffle 时间随 slowstart 的变化  **
+**4.  Shuffle 时间随 slowstart 的变化  **
 
-** 图 4：Shuffle 时间随 slowstart 的变化图**
+**图 4**：Shuffle 时间随 slowstart 的变化图
 
-![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764324737944-d19c6348-f308-4fd7-91a6-17a34e0a0811.png)** **
+![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764324737944-d19c6348-f308-4fd7-91a6-17a34e0a0811.png)
 
 + <font style="color:rgb(51, 51, 51);">WordCount：slowstart 从 </font>**<font style="color:rgb(51, 51, 51);">0.05/0.10 到 0.3/0.5 </font>**<font style="color:rgb(51, 51, 51);">时，每个 Reduce 的平均 Shuffle 时间由 </font>**<font style="color:rgb(51, 51, 51);">~34s</font>**<font style="color:rgb(51, 51, 51);"> 下降到 </font>**<font style="color:rgb(51, 51, 51);">~24–25s</font>**<font style="color:rgb(51, 51, 51);">，slowstart≥0.7 时进一步降到 ~4–6s。Shuffle 时间变短是因为 Reduce 等 Map 完成后才拉取数据、等待时间少，但此时 Map/Reduce 几乎顺序执行，总耗时反而上升（见图1）。</font>
 + <font style="color:rgb(51, 51, 51);">TeraSort：0.05–0.5 区间 Shuffle 时间保持 11–13s、在 slowstart=0.2 最优，说明适度提前 Reduce 可以边 Map 边拉取数据。slowstart≥0.7 时 Shuffle 时间虽降到 ~5s，但 Reduce 启动过晚（见图2），失去阶段重叠，Map和Reduce操作接近串行导致总耗时提升。</font>

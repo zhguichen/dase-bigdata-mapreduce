@@ -49,9 +49,9 @@
 
 **集群 Web UI 访问地址**
 
-+ HDFS NameNode: [http://47.116.112.198:9870](about:blank)
-+ YARN ResourceManager: [http://47.116.112.198:8088](about:blank)
-+ JobHistory Server: [http://47.116.112.198:19888](about:blank)
++ HDFS NameNode: [http://47.116.119.3:9870](about:blank)
++ YARN ResourceManager: [http://47.116.119.3:8088](about:blank)
++ JobHistory Server: [http://47.116.119.3:19888](about:blank)
 
 ---
 

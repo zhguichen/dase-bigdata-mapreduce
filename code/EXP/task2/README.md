@@ -199,8 +199,8 @@ hadoop jar wordcount.jar WordCount \
 
 ### Web UI
 
-- ResourceManager: http://47.116.112.198:8088
-- JobHistory: http://47.116.112.198:19888
+- ResourceManager: http://47.116.119.3:8088
+- JobHistory: http://47.116.119.3:19888
 
 ### 命令行
 

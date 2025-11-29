@@ -261,11 +261,11 @@ hadoop jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar \
 
 ### Web UI
 
-- **ResourceManager**: http://47.116.112.198:8088
+- **ResourceManager**: http://47.116.119.3:8088
   - 查看运行中和历史作业
   - 监控集群资源使用
   
-- **JobHistory**: http://47.116.112.198:19888
+- **JobHistory**: http://47.116.119.3:19888
   - 查看作业详细历史
   - 分析 Map/Reduce 时间分布
   - 查看 Shuffle 阶段时间

@@ -154,16 +154,16 @@ source /root/Exp-hadoop/.venv/bin/activate
 
 ## Hadoop 集群信息
 
-- **Master**: 172.31.12.133 (公网: 47.116.112.198)
+- **Master**: 172.31.12.133 (公网: 47.116.119.3)
 - **Slave1**: 172.31.12.134
 - **Slave2**: 172.31.12.135
 - **Slave3**: 172.31.12.136
 
 ### Web UI
 
-- **ResourceManager**: http://47.116.112.198:8088
-- **JobHistory Server**: http://47.116.112.198:19888
-- **NameNode**: http://47.116.112.198:9870
+- **ResourceManager**: http://47.116.119.3:8088
+- **JobHistory Server**: http://47.116.119.3:19888
+- **NameNode**: http://47.116.119.3:9870
 
 ## 常见问题
 

@@ -334,7 +334,7 @@ def main():
         print("\nTo view results:")
         print(f"  cat {results_file} | python3 -m json.tool")
         print("\nFor Task 4 analysis, detailed Reduce task times can be extracted from JobHistory")
-        print("  Access: http://47.116.112.198:19888")
+        print("  Access: http://47.116.119.3:19888")
         
     except KeyboardInterrupt:
         print("\n\n✗ Experiments interrupted by user")
