@@ -878,12 +878,12 @@ slowstart 推荐设置：
    - **不同数据规模和任务类型**<font style="color:rgb(51, 51, 51);">：实验结果显示，slowstart  参数对不同数据规模和任务类型的影响有所不同。对于大规模数据集或复杂的任务（如 TeraSort），适当提前启动 Reduce 阶段能显著提高性能，尤其是在数据倾斜严重时，优化启动时机可以减少等待和提升任务的总体效率。</font>
    - **数据倾斜的影响**<font style="color:rgb(51, 51, 51);">：在存在数据倾斜的场景下，合理的 slowstart  设置能够帮助平衡不同阶段的负载，减少由于数据倾斜带来的 Shuffle 阶段压力，从而优化整个任务的执行效率。同时，</font>当启用Combiner时，倾斜数据因Map端的局部聚合效应，Shuffle数据量大幅减少（降至均匀数据的40-50%），反而比均匀数据执行更快。这掩盖了数据倾斜的负面效应。
 
-### <font style="color:rgb(51, 51, 51);">分工</font>
+### 分工
 
-| <font style="color:rgb(51, 51, 51);">姓名</font>   | <font style="color:rgb(51, 51, 51);">学号</font>        | <font style="color:rgb(51, 51, 51);">分工</font>             | <font style="color:rgb(51, 51, 51);">排名</font> |
-| -------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------ |
-| <font style="color:rgb(51, 51, 51);">张桂晨</font> | <font style="color:rgb(51, 51, 51);">51285903131</font> | <font style="color:rgb(51, 51, 51);">主要代码撰写、Task2测试、撰写报告</font> | <font style="color:rgb(51, 51, 51);">1</font>    |
-| <font style="color:rgb(51, 51, 51);">祝予晗</font> | <font style="color:rgb(51, 51, 51);">51285903139</font> | <font style="color:rgb(51, 51, 51);">代码撰写、Task1测试、撰写报告</font> | <font style="color:rgb(51, 51, 51);">2</font>    |
-| <font style="color:rgb(51, 51, 51);">李泽朋</font> | <font style="color:rgb(51, 51, 51);">51285903125</font> | <font style="color:rgb(51, 51, 51);">Task4测试、撰写报告</font> | <font style="color:rgb(51, 51, 51);">3</font>    |
-| <font style="color:rgb(51, 51, 51);">李涵一</font> | <font style="color:rgb(51, 51, 51);">51285903137</font> | <font style="color:rgb(51, 51, 51);">Task3测试</font>        | <font style="color:rgb(51, 51, 51);">4</font>    |
+| 姓名   | 学号        | 分工                     | 排名 |
+| ------ | ----------- | ------------------------ | ---- |
+| 张桂晨 | 51285903131 | 主要代码撰写、Task2测试、撰写报告 | 1    |
+| 祝予晗 | 51285903139 | 代码撰写、Task1测试、撰写报告    | 2    |
+| 李泽朋 | 51285903125 | Task4测试、撰写报告、视频制作           | 3    |
+| 李涵一 | 51285903137 | Task3测试、视频制作                      | 4    |
 
