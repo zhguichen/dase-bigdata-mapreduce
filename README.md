@@ -1,8 +1,8 @@
-## <font style="color:rgb(51, 51, 51);">研究目的</font>
+## 研究目的
 
-<font style="color:rgb(51, 51, 51);">探究 MapReduce 中 Reduce 任务的启动时机及其对作业性能的影响</font>
+探究 MapReduce 中 Reduce 任务的启动时机及其对作业性能的影响
 
-## <font style="color:rgb(51, 51, 51);">研究内容</font>
+## 研究内容
 
 本研究围绕 MapReduce 中 Reduce 任务的启动时机展开，主要分析 Reduce 在何种条件下开始执行，以及不同启动时机对整个作业执行效率与资源利用率的影响。研究内容包括：
 
@@ -13,9 +13,9 @@
 3. **探索 Reduce 启动策略在不同场景下的适用性**（扩展研究）  
    包括不同数据规模、不同类型任务以及数据倾斜等条件下，Reduce 启动时机的表现和策略差异，以更全面理解 Reduce 启动时机在多种实际场景下的作用。
 
-## <font style="color:rgb(51, 51, 51);">实验</font>
+## 实验
 
-### <font style="color:rgb(51, 51, 51);">实验环境</font>
+### 实验环境
 
 #### 1. 硬件环境
 
@@ -81,18 +81,18 @@
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764296047775-b3985335-3268-4bce-b842-e14163bcc3ea.png?x-oss-process=image%2Fformat%2Cwebp)
 
-### <font style="color:rgb(51, 51, 51);">实验负载</font>
+### 实验负载
 
 本实验共使用四类数据集与对应的工作负载，以覆盖不同规模、不同任务类型、不同分布特征的典型 MapReduce 场景。数据集均通过实验脚本自动生成，对应的函数与特性如下表所示。
 
 #### 1. 数据集概述
 
-| <font style="color:rgb(51, 51, 51);">Task</font> | <font style="color:rgb(51, 51, 51);">数据生成函数</font>     | <font style="color:rgb(51, 51, 51);">词库大小</font>   | <font style="color:rgb(51, 51, 51);">数据特征</font>         | <font style="color:rgb(51, 51, 51);">分布类型</font>    | <font style="color:rgb(51, 51, 51);">特殊设计</font>         |
-| ------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------------ |
-| **Task 1**                                       | `<font style="color:rgb(51, 51, 51);">generate_random_text()</font>` | <font style="color:rgb(51, 51, 51);">~100 词</font>    | <font style="color:rgb(51, 51, 51);">常见英文词</font>       | <font style="color:rgb(51, 51, 51);">均匀随机</font>    | <font style="color:rgb(51, 51, 51);">1 GB</font>             |
-| **Task 2**                                       | `<font style="color:rgb(51, 51, 51);">generate_random_text()</font>` | <font style="color:rgb(51, 51, 51);">~100 词</font>    | <font style="color:rgb(51, 51, 51);">常见英文词 </font>      | <font style="color:rgb(51, 51, 51);">均匀随机</font>    | <font style="color:rgb(51, 51, 51);">多规模数据（500MB / 1GB / 1.5GB）</font> |
-| **Task 3**                                       | `<font style="color:rgb(51, 51, 51);">generate_random_text()</font>` | <font style="color:rgb(51, 51, 51);">~100 词</font>    | <font style="color:rgb(51, 51, 51);">常见英文词</font>       | <font style="color:rgb(51, 51, 51);">均匀随机</font>    | <font style="color:rgb(51, 51, 51);">WordCount 用该数据、TeraSort 使用 TeraGen</font> |
-| **Task 4**                                       | `<font style="color:rgb(51, 51, 51);">generate_skewed_data()</font>`<br/><font style="color:rgb(51, 51, 51);"> / </font>`<font style="color:rgb(51, 51, 51);">generate_uniform_data()</font>` | <font style="color:rgb(51, 51, 51);">~10,000 词</font> | <font style="color:rgb(51, 51, 51);">热点 key（hotkey）+ 10,000 普通词</font> | <font style="color:rgb(51, 51, 51);">倾斜 / 均匀</font> | <font style="color:rgb(51, 51, 51);">倾斜 60% vs 均匀对照</font> |
+| Task | 数据生成函数 | 词库大小 | 数据特征 | 分布类型 | 特殊设计 |
+| ---- | ------------ | -------- | -------- | -------- | -------- |
+| **Task 1** | `generate_random_text()` | ~100 词 | 常见英文词 | 均匀随机 | 1 GB |
+| **Task 2** | `generate_random_text()` | ~100 词 | 常见英文词 | 均匀随机 | 多规模数据（500MB / 1GB / 1.5GB） |
+| **Task 3** | `generate_random_text()` | ~100 词 | 常见英文词 | 均匀随机 | WordCount 用该数据、TeraSort 使用 TeraGen |
+| **Task 4** | `generate_skewed_data()` / `generate_uniform_data()` | ~10,000 词 | 热点 key（hotkey）+ 10,000 普通词 | 倾斜 / 均匀 | 倾斜 60% vs 均匀对照 |
 
 
 
@@ -144,7 +144,7 @@
 + 所有单词随机出现
 + 作为对照组用于比较倾斜行为
 
-### <font style="color:rgb(51, 51, 51);">实验步骤</font>
+### 实验步骤
 
 #### Task1 
 
@@ -152,12 +152,12 @@
 
 **目的**
 
-+ 探究不同时间下进行reduce操作（即<font style="color:rgb(51, 51, 51);">在不同 slowstart 值下(0.05-1.00)）</font>，对单一固定规模作业的影响。
++ 探究不同时间下进行reduce操作（即在不同 slowstart 值下(0.05-1.00)），对单一固定规模作业的影响。
 
 **测试参数**
 
-+ <font style="color:rgb(51, 51, 51);">作业类型：</font>**<font style="color:rgb(51, 51, 51);">WordCount</font>**<font style="color:rgb(51, 51, 51);">：解析行、分词、计数。</font>
-+ <font style="color:rgb(51, 51, 51);">Reduce数量：4</font>
++ 作业类型：**WordCount**：解析行、分词、计数。
++ Reduce数量：4
 + Slowstart测试值：0.05,0.10,0.20,0.30,0.50,0.70,0.80,0.90,1.00
 + 每组运行次数：3次（取平均值）
 
@@ -299,8 +299,8 @@ task1/results/
 
 **目的**
 
-+ <font style="color:rgb(51, 51, 51);">验证数据量增大时，最佳 Reduce 启动时机（slowstart）是否发生漂移。</font>
-+ <font style="color:rgb(51, 51, 51);">评估 slowstart（即 Reduce 提前启动比例）在不同数据规模（500 MB、1 GB、1.5 GB）下的最优取值。</font>
++ 验证数据量增大时，最佳 Reduce 启动时机（slowstart）是否发生漂移。
++ 评估 slowstart（即 Reduce 提前启动比例）在不同数据规模（500 MB、1 GB、1.5 GB）下的最优取值。
 
 **测试参数**
 
@@ -378,14 +378,14 @@ python3 extract_job_timing.py --batch ../task3/results/raw_results_YYYYMMDD_HHMM
 
 **目的**
 
-+ <font style="color:rgb(51, 51, 51);">比较不同作业类型在不同 slowstart 配置下的性能变化。</font>
-+ <font style="color:rgb(51, 51, 51);">分析 Reduce 提前/延后启动对不同工作负载阶段重叠度的影响。</font>
-+ <font style="color:rgb(51, 51, 51);">给出面向不同作业类型的 slowstart 参数建议。</font>
++ 比较不同作业类型在不同 slowstart 配置下的性能变化。
++ 分析 Reduce 提前/延后启动对不同工作负载阶段重叠度的影响。
++ 给出面向不同作业类型的 slowstart 参数建议。
 
 **测试参数**
 
-+ <font style="color:rgb(51, 51, 51);">作业类型：</font>**<font style="color:rgb(51, 51, 51);">WordCount</font>**<font style="color:rgb(51, 51, 51);">：解析行、分词、计数，Map 端计算量高，Shuffle 规模很小。</font>**<font style="color:rgb(51, 51, 51);">TeraSort</font>**<font style="color:rgb(51, 51, 51);">：需要大规模排序与分发，中间数据和 Shuffle 量显著更大。</font>
-+ <font style="color:rgb(51, 51, 51);">Reduce数量：4</font>
++ 作业类型：**WordCount**：解析行、分词、计数，Map 端计算量高，Shuffle 规模很小。**TeraSort**：需要大规模排序与分发，中间数据和 Shuffle 量显著更大。
++ Reduce数量：4
 + Slowstart测试值：0.05,0.10,0.20,0.30,0.50,0.70,0.80,0.90,1.00
 + 每组运行次数：3次（取平均值）
 
@@ -559,7 +559,7 @@ python3 extract_job_timing.py --batch ../task4/results/raw_results_YYYYMMDD_HHMM
 
 `Exp/tools/FIELD_SPECIFICATION.md - 完整字段规范文档（包含数据倾斜分析章节）`
 
-### <font style="color:rgb(51, 51, 51);">实验结果与分析</font>
+### 实验结果与分析
 
 #### Task1 实验结果与分析
 
@@ -645,18 +645,18 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 
 **1. 不同数据规模下耗时最短的slowstart配置及关键指标**
 
-| **<font style="color:rgb(51, 51, 51);">数据规模</font>** | **<font style="color:rgb(51, 51, 51);">最优 slowstart</font>** | **<font style="color:rgb(51, 51, 51);">平均耗时 (s)</font>** | **<font style="color:rgb(51, 51, 51);">耗时标准差 (s)</font>** | **<font style="color:rgb(51, 51, 51);">Map总耗时 (s)</font>** | **<font style="color:rgb(51, 51, 51);">Reduce总耗时 (s)</font>** | **<font style="color:rgb(51, 51, 51);">CPU总时间 (s)</font>** | **<font style="color:rgb(51, 51, 51);">Reduce标准差 (s)</font>** |
-| :------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
-| <font style="color:rgb(51, 51, 51);">500 MB</font>       | <font style="color:rgb(51, 51, 51);">0.10</font>             | <font style="color:rgb(51, 51, 51);">50.52</font>            | <font style="color:rgb(51, 51, 51);">14.37</font>            | <font style="color:rgb(51, 51, 51);">268.77</font>           | <font style="color:rgb(51, 51, 51);">80.67</font>            | <font style="color:rgb(51, 51, 51);">222.17</font>           | <font style="color:rgb(51, 51, 51);">2.65</font>             |
-| <font style="color:rgb(51, 51, 51);">1 GB</font>         | <font style="color:rgb(51, 51, 51);">0.50</font>             | <font style="color:rgb(51, 51, 51);">66.12</font>            | <font style="color:rgb(51, 51, 51);">0.53</font>             | <font style="color:rgb(51, 51, 51);">564.25</font>           | <font style="color:rgb(51, 51, 51);">91.96</font>            | <font style="color:rgb(51, 51, 51);">470.06</font>           | <font style="color:rgb(51, 51, 51);">8.09</font>             |
-| <font style="color:rgb(51, 51, 51);">1500 MB</font>      | <font style="color:rgb(51, 51, 51);">0.90</font>             | <font style="color:rgb(51, 51, 51);">94.69</font>            | <font style="color:rgb(51, 51, 51);">1.07</font>             | <font style="color:rgb(51, 51, 51);">781.44</font>           | <font style="color:rgb(51, 51, 51);">21.87</font>            | <font style="color:rgb(51, 51, 51);">684.25</font>           | <font style="color:rgb(51, 51, 51);">1.08</font>             |
+| 数据规模 | 最优 slowstart | 平均耗时 (s) | 耗时标准差 (s) | Map总耗时 (s) | Reduce总耗时 (s) | CPU总时间 (s) | Reduce标准差 (s) |
+| :------- | :------------- | :----------- | :------------- | :------------ | :--------------- | :------------ | :-------------- |
+| 500 MB   | 0.10           | 50.52        | 14.37          | 268.77        | 80.67            | 222.17        | 2.65            |
+| 1 GB     | 0.50           | 66.12        | 0.53           | 564.25        | 91.96            | 470.06        | 8.09            |
+| 1500 MB  | 0.90           | 94.69        | 1.07           | 781.44        | 21.87            | 684.25        | 1.08            |
 
 
 分析：
 
-+ **<font style="color:rgb(51, 51, 51);">500 MB</font>**<font style="color:rgb(51, 51, 51);">：最佳 slowstart=0.10，Map/Reduce 分别耗时 268.77 s 与 80.67 s。Map 完成时间 44.27 s，Reduce 启动时间 27.29 s（早于 Map 完成），说明小数据规模下可以提前启动 Reduce。</font>
-+ **<font style="color:rgb(51, 51, 51);">1 GB</font>**<font style="color:rgb(51, 51, 51);">：最佳 slowstart=0.50，Map 阶段平均 564.25 s，Reduce 91.96 s。Map 完成时间 64.58 s，Reduce 启动时间 36.43 s（在 Map 完成前启动）。</font>
-+ **<font style="color:rgb(51, 51, 51);">1.5 GB</font>**<font style="color:rgb(51, 51, 51);">：最佳 slowstart=0.90，Map 781.44 s、Reduce 21.87 s，整体 CPU 时间 684.25 s。Map 完成时间 89.81 s，Reduce 启动时间 87.61 s（几乎与 Map 同时完成），说明让 Map 大幅完成后再启动 Reduce 可减少 shuffle 堵塞。</font>
++ **500 MB**：最佳 slowstart=0.10，Map/Reduce 分别耗时 268.77 s 与 80.67 s。Map 完成时间 44.27 s，Reduce 启动时间 27.29 s（早于 Map 完成），说明小数据规模下可以提前启动 Reduce。
++ **1 GB**：最佳 slowstart=0.50，Map 阶段平均 564.25 s，Reduce 91.96 s。Map 完成时间 64.58 s，Reduce 启动时间 36.43 s（在 Map 完成前启动）。
++ **1.5 GB**：最佳 slowstart=0.90，Map 781.44 s、Reduce 21.87 s，整体 CPU 时间 684.25 s。Map 完成时间 89.81 s，Reduce 启动时间 87.61 s（几乎与 Map 同时完成），说明让 Map 大幅完成后再启动 Reduce 可减少 shuffle 堵塞。
 
 **2. 不同数据规模的 slowstart-耗时曲线**
 
@@ -668,19 +668,19 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 + 1 GB 的最优点在 slowstart=0.5，曲线相对平滑
 + 1.5 GB 的最优点在 slowstart=0.9，曲线在 0.7~1.0 区间表现最佳
 
-**3. ****<font style="color:rgb(51, 51, 51);">关键阶段时间随 slowstart 变化</font>**
+**3. 关键阶段时间随 slowstart 变化**
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/32620802/1764338736653-9593d7a5-8829-4fd1-8745-b1ef976077a2.png)
 
-+ **<font style="color:rgb(51, 51, 51);">500 MB</font>**<font style="color:rgb(51, 51, 51);">：当 slowstart≥0.8 时，Reduce 启动时间（约 45 s）早于 Map 完成时间（约 44~48 s），说明小数据规模下可以充分利用并行性</font>
-+ **<font style="color:rgb(51, 51, 51);">1 GB</font>**<font style="color:rgb(51, 51, 51);">：Reduce 启动时间随 slowstart 增大而延迟，最优配置（slowstart=0.5）下 Reduce 在 Map 完成前约 28 s 启动</font>
-+ **<font style="color:rgb(51, 51, 51);">1.5 GB</font>**<font style="color:rgb(51, 51, 51);">：最优配置（slowstart=0.9）下，Reduce 启动时间（87.61 s）几乎与 Map 完成时间（89.81 s）同步，避免了过早启动导致的资源浪费</font>
++ **500 MB**：当 slowstart≥0.8 时，Reduce 启动时间（约 45 s）早于 Map 完成时间（约 44~48 s），说明小数据规模下可以充分利用并行性
++ **1 GB**：Reduce 启动时间随 slowstart 增大而延迟，最优配置（slowstart=0.5）下 Reduce 在 Map 完成前约 28 s 启动
++ **1.5 GB**：最优配置（slowstart=0.9）下，Reduce 启动时间（87.61 s）几乎与 Map 完成时间（89.81 s）同步，避免了过早启动导致的资源浪费
 
 ****
 
 **总结**
 
-1. **<font style="color:rgb(51, 51, 51);">最优 slowstart 随数据规模单调增大并发生漂移</font>**<font style="color:rgb(51, 51, 51);">：500 MB→0.1，1 GB→0.5，1.5 GB→0.9。这一规律清晰地验证了数据量增大时，最佳 Reduce 启动时机（slowstart）确实发生了漂移，为不同数据规模下的参数调优提供了一定的指导。</font>
+1. **最优 slowstart 随数据规模单调增大并发生漂移**：500 MB→0.1，1 GB→0.5，1.5 GB→0.9。这一规律清晰地验证了数据量增大时，最佳 Reduce 启动时机（slowstart）确实发生了漂移，为不同数据规模下的参数调优提供了一定的指导。
 
 
 
@@ -727,7 +727,7 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 结合这一实验结果，可以分析出：
 
 + **TeraSort** 的主要瓶颈在于 Shuffle 和 I/O，因此需要通过调整 `slowstart` 等参数，提前启动 Reduce 阶段，从而优化调度并缓解 Shuffle 阶段的等待压力。  
-+ **WordCount** 受限于 **计算负载**，虽然其 **Shuffle** 阶段相对时间较短，但 <font style="color:rgb(51, 51, 51);">Reduce 过早启动只会增加等待，适合中等 slowstart。</font>
++ **WordCount** 受限于 **计算负载**，虽然其 **Shuffle** 阶段相对时间较短，但 Reduce 过早启动只会增加等待，适合中等 slowstart。
 
 **4.  Shuffle 时间随 slowstart 的变化  **
 
@@ -735,8 +735,8 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764324737944-d19c6348-f308-4fd7-91a6-17a34e0a0811.png)
 
-+ <font style="color:rgb(51, 51, 51);">WordCount：slowstart 从 </font>**<font style="color:rgb(51, 51, 51);">0.05/0.10 到 0.3/0.5 </font>**<font style="color:rgb(51, 51, 51);">时，每个 Reduce 的平均 Shuffle 时间由 </font>**<font style="color:rgb(51, 51, 51);">~34s</font>**<font style="color:rgb(51, 51, 51);"> 下降到 </font>**<font style="color:rgb(51, 51, 51);">~24–25s</font>**<font style="color:rgb(51, 51, 51);">，slowstart≥0.7 时进一步降到 ~4–6s。Shuffle 时间变短是因为 Reduce 等 Map 完成后才拉取数据、等待时间少，但此时 Map/Reduce 几乎顺序执行，总耗时反而上升（见图1）。</font>
-+ <font style="color:rgb(51, 51, 51);">TeraSort：0.05–0.5 区间 Shuffle 时间保持 11–13s、在 slowstart=0.2 最优，说明适度提前 Reduce 可以边 Map 边拉取数据。slowstart≥0.7 时 Shuffle 时间虽降到 ~5s，但 Reduce 启动过晚（见图2），失去阶段重叠，Map和Reduce操作接近串行导致总耗时提升。</font>
++ WordCount：slowstart 从 **0.05/0.10 到 0.3/0.5** 时，每个 Reduce 的平均 Shuffle 时间由 **~34s** 下降到 **~24–25s**，slowstart≥0.7 时进一步降到 ~4–6s。Shuffle 时间变短是因为 Reduce 等 Map 完成后才拉取数据、等待时间少，但此时 Map/Reduce 几乎顺序执行，总耗时反而上升（见图1）。
++ TeraSort：0.05–0.5 区间 Shuffle 时间保持 11–13s、在 slowstart=0.2 最优，说明适度提前 Reduce 可以边 Map 边拉取数据。slowstart≥0.7 时 Shuffle 时间虽降到 ~5s，但 Reduce 启动过晚（见图2），失去阶段重叠，Map和Reduce操作接近串行导致总耗时提升。
 
 总体而言，Shuffle 时间随 slowstart 增大会缩短，但并不等价于更快的作业；适度的 Shuffle 并行与阶段重叠才是更优折中。WordCount 在 0.3 左右兼顾较低 Shuffle 时间与总耗时，TeraSort 在 0.2 左右保持 Shuffle 负载可控且整体最快。
 
@@ -870,26 +870,26 @@ slowstart 推荐设置：
     * 倾斜数据的最优slowstart值偏向更早的区间（如0.05-0.20），试图通过更强的并行度来缓解长尾压力。
     * 均匀数据的最优值则更居中（如0.30-0.50），过早启动反而会因资源竞争导致轻微性能下降。
 
-### <font style="color:rgb(51, 51, 51);">结论</font>
+### 结论
 
 本研究围绕 MapReduce 中 Reduce 任务的启动时机 展开，分析了不同启动时机对作业执行效率和资源利用率的影响。通过四个关键实验，研究了 slowstart 参数的调整如何影响 Reduce 阶段的启动时机，并进一步分析了其对整个 MapReduce 作业的性能表现。以下是主要的结论：
 
-1. **Reduce 启动时机的分析**<font style="color:rgb(51, 51, 51);">：</font>
-   - **Reduce 启动时机与 Map 完成的依赖关系**<font style="color:rgb(51, 51, 51);">：在不同的 slowstart  参数设置下，实验表明 Reduce 阶段不必等待 Map 阶段的完全结束即可开始处理数据。合理地提前启动 Reduce 可以有效地减小任务的总执行时间，尤其是当 slowstart 设置适中时，Map 和 Reduce 阶段能够更好地重叠执行，避免不必要的等待时间。</font>
-2. **不同启动时机对执行效率和资源利用率的影响**<font style="color:rgb(51, 51, 51);">：</font>
-   - **过早启动 Reduce 的影响**<font style="color:rgb(51, 51, 51);">： 当 slowstart  设置过低时，Reduce 阶段可能会在 Map 阶段尚未完成时启动。虽然此时 Reduce 阶段开始提前拉取数据，但由于 Map 阶段的输出数据尚未完全准备好，Reduce 阶段会出现 </font>**等待数据的空闲时间**<font style="color:rgb(51, 51, 51);">。这种等待时间导致了 </font>**资源利用的低效**<font style="color:rgb(51, 51, 51);">，尤其是在 CPU 和内存的使用上。此外，虽然 Map 和 Reduce 阶段可能有重叠，但如果 Reduce 阶段启动得太早，反而不能充分利用资源，导致 </font>**总执行时间的增加**<font style="color:rgb(51, 51, 51);">。  </font>
-   - **适中启动时机的优势**<font style="color:rgb(51, 51, 51);">：在大多数情况下，slowstart  设置在 0.2 到 0.5 范围内时，任务执行时间最短。此时，Map 和 Reduce 阶段能有效重叠执行，Shuffle 阶段的时间得到缩短，资源利用率和任务执行效率都得到了优化。</font>
-   - **过晚启动 Reduce 的问题**<font style="color:rgb(51, 51, 51);">：当 slowstart  超过 0.7 时，Shuffle 时间进一步减少，但 Reduce 启动过晚，导致阶段重叠不充分，最终增加了总执行时间。这表明，在某些任务中，适当的调度和阶段重叠对性能优化至关重要。</font>
-3. **Reduce 启动策略的适用性**<font style="color:rgb(51, 51, 51);">：</font>
-   - **不同数据规模和任务类型**<font style="color:rgb(51, 51, 51);">：实验结果显示，slowstart  参数对不同数据规模和任务类型的影响有所不同。对于大规模数据集或复杂的任务（如 TeraSort），适当提前启动 Reduce 阶段能显著提高性能，尤其是在数据倾斜严重时，优化启动时机可以减少等待和提升任务的总体效率。</font>
-   - **数据倾斜的影响**<font style="color:rgb(51, 51, 51);">：在存在数据倾斜的场景下，合理的 slowstart  设置能够帮助平衡不同阶段的负载，减少由于数据倾斜带来的 Shuffle 阶段压力，从而优化整个任务的执行效率。同时，</font>当启用Combiner时，倾斜数据因Map端的局部聚合效应，Shuffle数据量大幅减少（降至均匀数据的40-50%），反而比均匀数据执行更快。这掩盖了数据倾斜的负面效应。
+1. **Reduce 启动时机的分析**：
+   - **Reduce 启动时机与 Map 完成的依赖关系**：在不同的 slowstart  参数设置下，实验表明 Reduce 阶段不必等待 Map 阶段的完全结束即可开始处理数据。合理地提前启动 Reduce 可以有效地减小任务的总执行时间，尤其是当 slowstart 设置适中时，Map 和 Reduce 阶段能够更好地重叠执行，避免不必要的等待时间。
+2. **不同启动时机对执行效率和资源利用率的影响**：
+   - **过早启动 Reduce 的影响**： 当 slowstart  设置过低时，Reduce 阶段可能会在 Map 阶段尚未完成时启动。虽然此时 Reduce 阶段开始提前拉取数据，但由于 Map 阶段的输出数据尚未完全准备好，Reduce 阶段会出现 **等待数据的空闲时间**。这种等待时间导致了 **资源利用的低效**，尤其是在 CPU 和内存的使用上。此外，虽然 Map 和 Reduce 阶段可能有重叠，但如果 Reduce 阶段启动得太早，反而不能充分利用资源，导致 **总执行时间的增加**。
+   - **适中启动时机的优势**：在大多数情况下，slowstart  设置在 0.2 到 0.5 范围内时，任务执行时间最短。此时，Map 和 Reduce 阶段能有效重叠执行，Shuffle 阶段的时间得到缩短，资源利用率和任务执行效率都得到了优化。
+   - **过晚启动 Reduce 的问题**：当 slowstart  超过 0.7 时，Shuffle 时间进一步减少，但 Reduce 启动过晚，导致阶段重叠不充分，最终增加了总执行时间。这表明，在某些任务中，适当的调度和阶段重叠对性能优化至关重要。
+3. **Reduce 启动策略的适用性**：
+   - **不同数据规模和任务类型**：实验结果显示，slowstart  参数对不同数据规模和任务类型的影响有所不同。对于大规模数据集或复杂的任务（如 TeraSort），适当提前启动 Reduce 阶段能显著提高性能，尤其是在数据倾斜严重时，优化启动时机可以减少等待和提升任务的总体效率。
+   - **数据倾斜的影响**：在存在数据倾斜的场景下，合理的 slowstart  设置能够帮助平衡不同阶段的负载，减少由于数据倾斜带来的 Shuffle 阶段压力，从而优化整个任务的执行效率。同时，当启用Combiner时，倾斜数据因Map端的局部聚合效应，Shuffle数据量大幅减少（降至均匀数据的40-50%），反而比均匀数据执行更快。这掩盖了数据倾斜的负面效应。
 
-### <font style="color:rgb(51, 51, 51);">分工</font>
+### 分工
 
-| <font style="color:rgb(51, 51, 51);">姓名</font>   | <font style="color:rgb(51, 51, 51);">学号</font>        | <font style="color:rgb(51, 51, 51);">分工</font>             | <font style="color:rgb(51, 51, 51);">排名</font> |
-| -------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------ |
-| <font style="color:rgb(51, 51, 51);">张桂晨</font> | <font style="color:rgb(51, 51, 51);">51285903131</font> | <font style="color:rgb(51, 51, 51);">主要代码撰写、Task2测试、撰写报告</font> | <font style="color:rgb(51, 51, 51);">1</font>    |
-| <font style="color:rgb(51, 51, 51);">祝予晗</font> | <font style="color:rgb(51, 51, 51);">51285903139</font> | <font style="color:rgb(51, 51, 51);">代码撰写、Task1测试、撰写报告</font> | <font style="color:rgb(51, 51, 51);">2</font>    |
-| <font style="color:rgb(51, 51, 51);">李泽朋</font> | <font style="color:rgb(51, 51, 51);">51285903125</font> | <font style="color:rgb(51, 51, 51);">Task4测试、撰写报告</font> | <font style="color:rgb(51, 51, 51);">3</font>    |
-| <font style="color:rgb(51, 51, 51);">李涵一</font> | <font style="color:rgb(51, 51, 51);">51285903137</font> | <font style="color:rgb(51, 51, 51);">Task3测试</font>        | <font style="color:rgb(51, 51, 51);">4</font>    |
+| 姓名   | 学号        | 分工             | 排名 |
+| ------ | ----------- | ---------------- | ---- |
+| 张桂晨 | 51285903131 | 主要代码撰写、Task2测试、撰写报告 | 1    |
+| 祝予晗 | 51285903139 | 代码撰写、Task1测试、撰写报告 | 2    |
+| 李泽朋 | 51285903125 | Task4测试、撰写报告 | 3    |
+| 李涵一 | 51285903137 | Task3测试        | 4    |
 
