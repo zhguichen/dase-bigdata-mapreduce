@@ -723,7 +723,7 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 + **TeraSort** 的主要瓶颈在于 Shuffle 和 I/O，因此需要通过调整 `slowstart` 等参数，提前启动 Reduce 阶段，从而优化调度并缓解 Shuffle 阶段的等待压力。  
 + **WordCount** 受限于 **计算负载**，虽然其 **Shuffle** 阶段相对时间较短，但 <font style="color:rgb(51, 51, 51);">Reduce 过早启动只会增加等待，适合中等 slowstart。</font>
 
-**4.  Shuffle 时间随 slowstart 的变化  **
+**4.  Shuffle 时间随 slowstart 的变化 **
 
 **图 4**：Shuffle 时间随 slowstart 的变化图
 
