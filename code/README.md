@@ -19,9 +19,7 @@
 
 #### 1. 硬件环境
 
-本实验的硬件环境大致如下，具体配置可参考：
-
-
+本实验的硬件环境大致如下，具体配置可参考：[环境配置](./code/环境配置.md)
 
 本实验在一套在阿里云服务器上租借用的由 **4 个节点** 组成的 Hadoop 集群上进行，集群配置如下：
 
@@ -49,9 +47,9 @@
 
 **集群 Web UI 访问地址**
 
-+ HDFS NameNode: [http://47.116.119.3:9870](about:blank)
-+ YARN ResourceManager: [http://47.116.119.3:8088](about:blank)
-+ JobHistory Server: [http://47.116.119.3:19888](about:blank)
++ HDFS NameNode: [http://47.116.112.198:9870](about:blank)
++ YARN ResourceManager: [http://47.116.112.198:8088](about:blank)
++ JobHistory Server: [http://47.116.112.198:19888](about:blank)
 
 ---
 
@@ -67,8 +65,6 @@
 | Python      | Python 3.10         |
 
 
-
-
 + `java -version` 与 `hadoop version`（如图所示）
 
       ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764296940856-2fdea8b0-1f69-4e00-a05e-08348b2b1ba7.png)
@@ -79,7 +75,7 @@
 
 + Python 环境激活与依赖检查（如图所示）
 
-### ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764296047775-b3985335-3268-4bce-b842-e14163bcc3ea.png?x-oss-process=image%2Fformat%2Cwebp)
+![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764296047775-b3985335-3268-4bce-b842-e14163bcc3ea.png?x-oss-process=image%2Fformat%2Cwebp)
 
 ### <font style="color:rgb(51, 51, 51);">实验负载</font>
 
@@ -389,7 +385,7 @@ python3 extract_job_timing.py --batch ../task3/results/raw_results_YYYYMMDD_HHMM
 + Slowstart测试值：0.05,0.10,0.20,0.30,0.50,0.70,0.80,0.90,1.00
 + 每组运行次数：3次（取平均值）
 
-**实验3步骤**
+##### **实验3步骤**
 
 hadoop集群的启动（HDFS和YARN）在之前的实验步骤中已经详细的展示过了，不再赘述。下面直接从数据集的准备开始讲述实验步骤。
 
@@ -567,7 +563,7 @@ python3 extract_job_timing.py --batch ../task4/results/raw_results_YYYYMMDD_HHMM
 
 **1. 总执行时间随 slowstart 变化**
 
-📌 图 1：**不同 slowstart 的平均总执行时间折线图**  
+图 1： **不同 slowstart 的平均总执行时间折线图**  
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764297440711-cffeaba2-f383-4873-a6d0-e06814d13882.png)
 
 结果呈典型的 **U 型曲线**：
@@ -581,7 +577,7 @@ python3 extract_job_timing.py --batch ../task4/results/raw_results_YYYYMMDD_HHMM
 
 **2. Map / Shuffle / Reduce 阶段时间分解**
 
-📌 图 2：**Map、Shuffle、Reduce 各阶段的时间分布**  
+ 图 2：**Map、Shuffle、Reduce 各阶段的时间分布**  
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764297604629-9435f5c7-8ec1-4745-82b8-86229bcd4125.png)
 
 其中左图为各个阶段的绝对时间：
@@ -602,25 +598,25 @@ python3 extract_job_timing.py --batch ../task4/results/raw_results_YYYYMMDD_HHMM
 
 **3. Reduce 启动时机的理论与实际差异**
 
-📌 图 3：Reduce 启动比例图（实际 vs 理论）  
+ 图 3：Reduce 启动比例图（实际 vs 理论）  
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764299649749-51ca4bb8-4d29-4021-b66a-39ccacbc28b4.png)理论上，Reduce 的启动时间应严格遵循 slowstart × Map 完成进度的关系,但实际上在slowstart较小的时候，第一次Reduce开始的时间都在50%到55%，这可能是因为当Map 阶段的输出量较小，Shuffle 阶段可能需要等待更多的数据才可以执行，从而消耗更多的时间来收集和排序数据，导致 Reduce 的启动被推迟。 
 
 此外，YARN ResourceManager 的调度策略也可能是导致 Reduce 延迟启动的一个原因。YARN 在调度 Reduce 阶段时，可能优先考虑其他任务的资源分配，尤其是在 集群资源紧张时，这会导致 Reduce 启动时延迟。即使理论上 Reduce 应该在某个比例后启动，YARN 可能由于资源限制将其推迟到 Map 完成后。  
 
 **4. 性能稳定性（方差分析）**
 
-📌 图 4：**标准差 & 变异系数柱状图**  
+图 4：**标准差 & 变异系数柱状图**  
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764301049401-c071c4d6-ebdb-412d-ac28-62309498bcc3.png)
 
 其中左图为同一个参数下3次实验的标准差：
 
-+ **  slowstart=0.30最稳定（1.22s标准差） **
-+ **  slowstart=0.50最不稳定（4.61s标准差）  **
++ slowstart=0.30最稳定（1.22s标准差） 
++ slowstart=0.50最不稳定（4.61s标准差）
 
 右图为同一个参数下3次实验的变异系数：
 
-+ **变异系数在1.8%-6.6%之间**
-+ **最佳性能配置（0.20）的稳定性中等（CV=3.7%）**
++ 变异系数在1.8%-6.6%之间
++ 最佳性能配置（0.20）的稳定性中等（CV=3.7%）
 
 从稳定性角度看，slowstart 在不同取值下的执行结果波动差别较大。slowstart=0.30 的结果最稳定，方差与变异系数均为最低，说明其运行最受调度随机性、网络波动和系统负载变化的影响最小。
 
@@ -630,7 +626,7 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 
 **5. 资源利用率分析（CPU & 内存）**
 
-📌 图 5：**资源利用率图（CPU/Memory）**  
+ 图 5：**资源利用率图（CPU/Memory）**  
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764301460770-14efa4df-d677-4f19-bff3-86a9ac924544.png)
 
 资源利用率图表显示，在不同 slowstart 值下，CPU 与内存使用均未出现显著差异。CPU 峰值、平均值以及内存消耗大致处于同一水平，说明 slowstart 参数不会改变 WordCount 作业的计算负载性质。
@@ -668,7 +664,7 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 + 1 GB 的最优点在 slowstart=0.5，曲线相对平滑
 + 1.5 GB 的最优点在 slowstart=0.9，曲线在 0.7~1.0 区间表现最佳
 
-**3. ****<font style="color:rgb(51, 51, 51);">关键阶段时间随 slowstart 变化</font>**
+**3. 关键阶段时间随 slowstart 变化**
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/32620802/1764338736653-9593d7a5-8829-4fd1-8745-b1ef976077a2.png)
 
@@ -681,8 +677,6 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 **总结**
 
 1. **<font style="color:rgb(51, 51, 51);">最优 slowstart 随数据规模单调增大并发生漂移</font>**<font style="color:rgb(51, 51, 51);">：500 MB→0.1，1 GB→0.5，1.5 GB→0.9。这一规律清晰地验证了数据量增大时，最佳 Reduce 启动时机（slowstart）确实发生了漂移，为不同数据规模下的参数调优提供了一定的指导。</font>
-
-
 
 #### Task3 实验结果与分析
 
@@ -729,11 +723,11 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 + **TeraSort** 的主要瓶颈在于 Shuffle 和 I/O，因此需要通过调整 `slowstart` 等参数，提前启动 Reduce 阶段，从而优化调度并缓解 Shuffle 阶段的等待压力。  
 + **WordCount** 受限于 **计算负载**，虽然其 **Shuffle** 阶段相对时间较短，但 <font style="color:rgb(51, 51, 51);">Reduce 过早启动只会增加等待，适合中等 slowstart。</font>
 
-** 4.  Shuffle 时间随 slowstart 的变化  **
+**4.  Shuffle 时间随 slowstart 的变化  **
 
-** 图 4：Shuffle 时间随 slowstart 的变化图**
+图 4：**Shuffle 时间随 slowstart 的变化图**
 
-![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764324737944-d19c6348-f308-4fd7-91a6-17a34e0a0811.png)** **
+![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764324737944-d19c6348-f308-4fd7-91a6-17a34e0a0811.png)
 
 + <font style="color:rgb(51, 51, 51);">WordCount：slowstart 从 </font>**<font style="color:rgb(51, 51, 51);">0.05/0.10 到 0.3/0.5 </font>**<font style="color:rgb(51, 51, 51);">时，每个 Reduce 的平均 Shuffle 时间由 </font>**<font style="color:rgb(51, 51, 51);">~34s</font>**<font style="color:rgb(51, 51, 51);"> 下降到 </font>**<font style="color:rgb(51, 51, 51);">~24–25s</font>**<font style="color:rgb(51, 51, 51);">，slowstart≥0.7 时进一步降到 ~4–6s。Shuffle 时间变短是因为 Reduce 等 Map 完成后才拉取数据、等待时间少，但此时 Map/Reduce 几乎顺序执行，总耗时反而上升（见图1）。</font>
 + <font style="color:rgb(51, 51, 51);">TeraSort：0.05–0.5 区间 Shuffle 时间保持 11–13s、在 slowstart=0.2 最优，说明适度提前 Reduce 可以边 Map 边拉取数据。slowstart≥0.7 时 Shuffle 时间虽降到 ~5s，但 Reduce 启动过晚（见图2），失去阶段重叠，Map和Reduce操作接近串行导致总耗时提升。</font>
