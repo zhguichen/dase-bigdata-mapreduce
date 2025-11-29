@@ -21,8 +21,6 @@
 
 本实验的硬件环境大致如下，具体配置可参考：[环境配置](./code/README.md)
 
-
-
 本实验在一套在阿里云服务器上租借用的由 **4 个节点** 组成的 Hadoop 集群上进行，集群配置如下：
 
 | 节点角色 | 节点数量 | CPU    | 内存  | 硬盘  | 网络带宽(max) |
@@ -87,12 +85,12 @@
 
 #### 1. 数据集概述
 
-| <font style="color:rgb(51, 51, 51);">Task</font> | <font style="color:rgb(51, 51, 51);">数据生成函数</font>     | <font style="color:rgb(51, 51, 51);">词库大小</font>   | <font style="color:rgb(51, 51, 51);">数据特征</font>         | <font style="color:rgb(51, 51, 51);">分布类型</font>    | <font style="color:rgb(51, 51, 51);">特殊设计</font>         |
-| ------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------------ |
-| **Task 1**                                       | `<font style="color:rgb(51, 51, 51);">generate_random_text()</font>` | <font style="color:rgb(51, 51, 51);">~100 词</font>    | <font style="color:rgb(51, 51, 51);">常见英文词</font>       | <font style="color:rgb(51, 51, 51);">均匀随机</font>    | <font style="color:rgb(51, 51, 51);">1 GB</font>             |
-| **Task 2**                                       | `<font style="color:rgb(51, 51, 51);">generate_random_text()</font>` | <font style="color:rgb(51, 51, 51);">~100 词</font>    | <font style="color:rgb(51, 51, 51);">常见英文词 </font>      | <font style="color:rgb(51, 51, 51);">均匀随机</font>    | <font style="color:rgb(51, 51, 51);">多规模数据（500MB / 1GB / 1.5GB）</font> |
-| **Task 3**                                       | `<font style="color:rgb(51, 51, 51);">generate_random_text()</font>` | <font style="color:rgb(51, 51, 51);">~100 词</font>    | <font style="color:rgb(51, 51, 51);">常见英文词</font>       | <font style="color:rgb(51, 51, 51);">均匀随机</font>    | <font style="color:rgb(51, 51, 51);">WordCount 用该数据、TeraSort 使用 TeraGen</font> |
-| **Task 4**                                       | `<font style="color:rgb(51, 51, 51);">generate_skewed_data()</font>`<br/><font style="color:rgb(51, 51, 51);"> / </font>`<font style="color:rgb(51, 51, 51);">generate_uniform_data()</font>` | <font style="color:rgb(51, 51, 51);">~10,000 词</font> | <font style="color:rgb(51, 51, 51);">热点 key（hotkey）+ 10,000 普通词</font> | <font style="color:rgb(51, 51, 51);">倾斜 / 均匀</font> | <font style="color:rgb(51, 51, 51);">倾斜 60% vs 均匀对照</font> |
+| <font style="color:rgb(51, 51, 51);">Task</font> | <font style="color:rgb(51, 51, 51);">数据生成函数</font> | <font style="color:rgb(51, 51, 51);">词库大小</font>   | <font style="color:rgb(51, 51, 51);">数据特征</font>         | <font style="color:rgb(51, 51, 51);">分布类型</font>    | <font style="color:rgb(51, 51, 51);">特殊设计</font>         |
+| ------------------------------------------------ | -------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------------ |
+| **Task 1**                                       | `generate_random_text()`                                 | <font style="color:rgb(51, 51, 51);">~100 词</font>    | <font style="color:rgb(51, 51, 51);">常见英文词</font>       | <font style="color:rgb(51, 51, 51);">均匀随机</font>    | <font style="color:rgb(51, 51, 51);">1 GB</font>             |
+| **Task 2**                                       | `generate_random_text()`                                 | <font style="color:rgb(51, 51, 51);">~100 词</font>    | <font style="color:rgb(51, 51, 51);">常见英文词 </font>      | <font style="color:rgb(51, 51, 51);">均匀随机</font>    | <font style="color:rgb(51, 51, 51);">多规模数据（500MB / 1GB / 1.5GB）</font> |
+| **Task 3**                                       | `generate_random_text()`                                 | <font style="color:rgb(51, 51, 51);">~100 词</font>    | <font style="color:rgb(51, 51, 51);">常见英文词</font>       | <font style="color:rgb(51, 51, 51);">均匀随机</font>    | <font style="color:rgb(51, 51, 51);">WordCount 用该数据、TeraSort 使用 TeraGen</font> |
+| **Task 4**                                       | `generate_skewed_dat()` `generate_uniform_data()`        | <font style="color:rgb(51, 51, 51);">~10,000 词</font> | <font style="color:rgb(51, 51, 51);">热点 key（hotkey）+ 10,000 普通词</font> | <font style="color:rgb(51, 51, 51);">倾斜 / 均匀</font> | <font style="color:rgb(51, 51, 51);">倾斜 60% vs 均匀对照</font> |
 
 
 
@@ -389,7 +387,7 @@ python3 extract_job_timing.py --batch ../task3/results/raw_results_YYYYMMDD_HHMM
 + Slowstart测试值：0.05,0.10,0.20,0.30,0.50,0.70,0.80,0.90,1.00
 + 每组运行次数：3次（取平均值）
 
-**实验3步骤**
+##### **实验3步骤**
 
 hadoop集群的启动（HDFS和YARN）在之前的实验步骤中已经详细的展示过了，不再赘述。下面直接从数据集的准备开始讲述实验步骤。
 
@@ -567,7 +565,7 @@ python3 extract_job_timing.py --batch ../task4/results/raw_results_YYYYMMDD_HHMM
 
 **1. 总执行时间随 slowstart 变化**
 
-📌 图 1：**不同 slowstart 的平均总执行时间折线图**  
+ 图 1：**不同 slowstart 的平均总执行时间折线图**  
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764297440711-cffeaba2-f383-4873-a6d0-e06814d13882.png)
 
 结果呈典型的 **U 型曲线**：
@@ -581,7 +579,7 @@ python3 extract_job_timing.py --batch ../task4/results/raw_results_YYYYMMDD_HHMM
 
 **2. Map / Shuffle / Reduce 阶段时间分解**
 
-📌 图 2：**Map、Shuffle、Reduce 各阶段的时间分布**  
+ 图 2：**Map、Shuffle、Reduce 各阶段的时间分布**  
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764297604629-9435f5c7-8ec1-4745-82b8-86229bcd4125.png)
 
 其中左图为各个阶段的绝对时间：
@@ -602,25 +600,25 @@ python3 extract_job_timing.py --batch ../task4/results/raw_results_YYYYMMDD_HHMM
 
 **3. Reduce 启动时机的理论与实际差异**
 
-📌 图 3：Reduce 启动比例图（实际 vs 理论）  
+ 图 3：Reduce 启动比例图（实际 vs 理论）  
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764299649749-51ca4bb8-4d29-4021-b66a-39ccacbc28b4.png)理论上，Reduce 的启动时间应严格遵循 slowstart × Map 完成进度的关系,但实际上在slowstart较小的时候，第一次Reduce开始的时间都在50%到55%，这可能是因为当Map 阶段的输出量较小，Shuffle 阶段可能需要等待更多的数据才可以执行，从而消耗更多的时间来收集和排序数据，导致 Reduce 的启动被推迟。 
 
 此外，YARN ResourceManager 的调度策略也可能是导致 Reduce 延迟启动的一个原因。YARN 在调度 Reduce 阶段时，可能优先考虑其他任务的资源分配，尤其是在 集群资源紧张时，这会导致 Reduce 启动时延迟。即使理论上 Reduce 应该在某个比例后启动，YARN 可能由于资源限制将其推迟到 Map 完成后。  
 
 **4. 性能稳定性（方差分析）**
 
-📌 图 4：**标准差 & 变异系数柱状图**  
+ 图 4：**标准差 & 变异系数柱状图**  
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764301049401-c071c4d6-ebdb-412d-ac28-62309498bcc3.png)
 
 其中左图为同一个参数下3次实验的标准差：
 
-+ **  slowstart=0.30最稳定（1.22s标准差） **
-+ **  slowstart=0.50最不稳定（4.61s标准差）  **
++ slowstart=0.30最稳定（1.22s标准差） 
++ slowstart=0.50最不稳定（4.61s标准差） 
 
 右图为同一个参数下3次实验的变异系数：
 
-+ **变异系数在1.8%-6.6%之间**
-+ **最佳性能配置（0.20）的稳定性中等（CV=3.7%）**
++ 变异系数在1.8%-6.6%之间
++ 最佳性能配置（0.20）的稳定性中等（CV=3.7%）
 
 从稳定性角度看，slowstart 在不同取值下的执行结果波动差别较大。slowstart=0.30 的结果最稳定，方差与变异系数均为最低，说明其运行最受调度随机性、网络波动和系统负载变化的影响最小。
 
@@ -630,7 +628,7 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 
 **5. 资源利用率分析（CPU & 内存）**
 
-📌 图 5：**资源利用率图（CPU/Memory）**  
+图 5：**资源利用率图（CPU/Memory）**  
 ![](https://cdn.nlark.com/yuque/0/2025/png/63078037/1764301460770-14efa4df-d677-4f19-bff3-86a9ac924544.png)
 
 资源利用率图表显示，在不同 slowstart 值下，CPU 与内存使用均未出现显著差异。CPU 峰值、平均值以及内存消耗大致处于同一水平，说明 slowstart 参数不会改变 WordCount 作业的计算负载性质。
@@ -668,7 +666,7 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 + 1 GB 的最优点在 slowstart=0.5，曲线相对平滑
 + 1.5 GB 的最优点在 slowstart=0.9，曲线在 0.7~1.0 区间表现最佳
 
-**3. ****<font style="color:rgb(51, 51, 51);">关键阶段时间随 slowstart 变化</font>**
+**3. 关键阶段时间随 slowstart 变化图**
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/32620802/1764338736653-9593d7a5-8829-4fd1-8745-b1ef976077a2.png)
 
@@ -676,13 +674,9 @@ slowstart=0.20 虽然平均性能最优，但其稳定性中等，这表明它�
 + **<font style="color:rgb(51, 51, 51);">1 GB</font>**<font style="color:rgb(51, 51, 51);">：Reduce 启动时间随 slowstart 增大而延迟，最优配置（slowstart=0.5）下 Reduce 在 Map 完成前约 28 s 启动</font>
 + **<font style="color:rgb(51, 51, 51);">1.5 GB</font>**<font style="color:rgb(51, 51, 51);">：最优配置（slowstart=0.9）下，Reduce 启动时间（87.61 s）几乎与 Map 完成时间（89.81 s）同步，避免了过早启动导致的资源浪费</font>
 
-****
-
 **总结**
 
-1. **<font style="color:rgb(51, 51, 51);">最优 slowstart 随数据规模单调增大并发生漂移</font>**<font style="color:rgb(51, 51, 51);">：500 MB→0.1，1 GB→0.5，1.5 GB→0.9。这一规律清晰地验证了数据量增大时，最佳 Reduce 启动时机（slowstart）确实发生了漂移，为不同数据规模下的参数调优提供了一定的指导。</font>
-
-
+最优 slowstart 随数据规模单调增大并发生漂移：500 MB→0.1，1 GB→0.5，1.5 GB→0.9。这一规律清晰地验证了数据量增大时，最佳 Reduce 启动时机（slowstart）确实发生了漂移，为不同数据规模下的参数调优提供了一定的指导。
 
 #### Task3 实验结果与分析
 
